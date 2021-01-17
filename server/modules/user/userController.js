@@ -49,7 +49,6 @@ export const deleteUser = async (req, res, next) => {
 }
 
 export const getAuthUser = async (req, res, next) => {
-  console.log("req.authUser")
   if (req.authUser) {
     return res.send(req.authUser)
   } else {
@@ -82,26 +81,6 @@ export const login = async (req, res, next) => {
         res.status(404).send({ error: "Invalid email or password" })
       }
     })
-  } catch (error) {
-    next(error)
-  }
-}
-
-export const createAdmin = async (req, res, next) => {
-  try {
-    const admin = await User.findOne({ email: "admin@gmail.com" })
-
-    if (admin) {
-      res.send(admin)
-    } else {
-      const newAdmin = await User.create({
-        email: "admin@gmail.com",
-        password: "admin123",
-        role: config.USER_ROLE.ADMIN,
-        name: "Admin"
-      })
-      res.send(newAdmin)
-    }
   } catch (error) {
     next(error)
   }

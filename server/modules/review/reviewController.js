@@ -1,5 +1,4 @@
 import Review from "./reviewModel.js"
-import User from "../user/userModel.js"
 import config from "../../config/index.js"
 
 export const getReviews = async (req, res, next) => {
@@ -43,15 +42,12 @@ export const putReview = async (req, res, next) => {
     switch (updatingReview.status) {
       case config.REVIEW_STATUS.ASSIGNED:
         if ((req.authUser._id = updatingReview.reviewer)) {
-          console.log("ASSIGNED")
           updatingReview.content = req.body.content
           updatingReview.status = config.REVIEW_STATUS.REVIEWED
         }
         break
 
       case config.REVIEW_STATUS.REVIEWED:
-        console.log("REVIEWED")
-
         if ((req.authUser._id = updatingReview.employee)) {
           updatingReview.feedback = req.body.feedback
           updatingReview.status = config.REVIEW_STATUS.FEEDBACKED

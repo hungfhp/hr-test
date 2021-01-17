@@ -1,4 +1,4 @@
-import decodeToken from "../middlewares/decodeToken.js"
+import decodeToken from "../middleware/decodeToken.js"
 
 import userRoute from "./user/userRoute.js"
 import reviewRoute from "./review/reviewRoute.js"

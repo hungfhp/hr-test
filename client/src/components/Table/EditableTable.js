@@ -83,9 +83,6 @@ const EditableTable = ({ records, columns, handleEdit }) => {
         dataSource={data}
         columns={mergedColumns}
         rowClassName="editable-row"
-        // pagination={{
-        //   onChange: cancel
-        // }}
       />
     </Form>
   )

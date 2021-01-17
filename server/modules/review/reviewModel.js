@@ -1,5 +1,4 @@
 import mongoose from "mongoose"
-import mongoosePaginate from "mongoose-paginate-v2"
 import config from "../../config/index.js"
 
 const reviewSchema = new mongoose.Schema(
@@ -30,8 +29,6 @@ const reviewSchema = new mongoose.Schema(
 reviewSchema.pre("save", (next) => {
   next()
 })
-
-reviewSchema.plugin(mongoosePaginate)
 
 const Review = mongoose.model("Review", reviewSchema)
 

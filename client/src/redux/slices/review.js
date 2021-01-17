@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit"
-import arrayToObjectKeys from "#/utils/arrayToObjectKeys.js"
 
 const initialState = {
   list: [],

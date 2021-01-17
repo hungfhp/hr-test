@@ -44,8 +44,8 @@ export const updateReviewThunk = (reviewId, reviewData) => {
   }
 }
 
-// export const deleteReviewThunk = async (reviewID) => {
-//   return (dispatch) => {
-//     return api.delete(`/api/reviews/${reviewID}`)
-//   }
-// }
+export const deleteReviewThunk = async (reviewID) => {
+  return (dispatch) => {
+    return api.delete(`/api/reviews/${reviewID}`)
+  }
+}

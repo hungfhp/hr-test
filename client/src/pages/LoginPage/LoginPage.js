@@ -7,11 +7,10 @@ import { selectAuth } from "#/redux/slices/auth.js"
 import { loginThunk } from "#/redux/actions/auth.js"
 
 const NormalLoginForm = () => {
-  const { authUser, isLoading, error } = useSelector(selectAuth)
+  const { authUser } = useSelector(selectAuth)
   const dispatch = useDispatch()
 
   const onFinish = (values) => {
-    console.log("Received values of login form: ", values)
     dispatch(loginThunk(values))
   }
 
@@ -31,7 +30,6 @@ const NormalLoginForm = () => {
         onFinish={onFinish}
       >
         <Form.Item
-          // label="Email"
           name="email"
           rules={[
             {
@@ -44,7 +42,6 @@ const NormalLoginForm = () => {
           <Input prefix={<MailOutlined className="site-form-item-icon" />} placeholder="Email" />
         </Form.Item>
         <Form.Item
-          // label="Password"
           name="password"
           rules={[
             {
@@ -64,8 +61,6 @@ const NormalLoginForm = () => {
           <Button type="primary" htmlType="submit" className="login-form-button">
             Log in
           </Button>
-          {/* <br /> */}
-          {/* Or <a href="">register now!</a> */}
         </Form.Item>
       </Form>
     </div>

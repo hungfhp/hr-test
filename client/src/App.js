@@ -31,7 +31,7 @@ function App() {
           {is_admin && <Route exact path="/employees" component={EmployeePage} />}
 
           <Route exact path="/404" component={ErrorPage} />
-          <Redirect to="/404" />
+          <Redirect to="/" />
         </Switch>
       </Layout>
     </Router>

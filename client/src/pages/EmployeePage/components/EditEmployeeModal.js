@@ -36,14 +36,12 @@ const EditEmployeeModal = ({ record, visible, handleClose }) => {
   }
 
   useEffect(() => {
-    if (!loading) {
-      form.resetFields()
-    }
-  })
+    form.resetFields()
+  }, [record])
 
   return (
     <>
-      <Modal visible={visible} title="Edit Employee" onCancel={handleClose} footer={[]}>
+      <Modal forceRender visible={visible} title="Edit Employee" onCancel={handleClose} footer={[]}>
         <Form {...layout} initialValues={record} form={form} onFinish={handleSubmit}>
           <Form.Item
             label="Email"

@@ -44,8 +44,8 @@ export const updateEmployeeThunk = (employeeId, employeeData) => {
   }
 }
 
-// export const deleteEmployeeThunk = async (employeeID) => {
-//   return (dispatch) => {
-//     return api.delete(`/api/users/${employeeID}`)
-//   }
-// }
+export const deleteEmployeeThunk = async (employeeID) => {
+  return (dispatch) => {
+    return api.delete(`/api/users/${employeeID}`)
+  }
+}

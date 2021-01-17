@@ -18,6 +18,10 @@ const EditReviewModal = ({ record, visible, handleClose }) => {
     dispatch(getEmployeeListThunk()).then(() => setLoading(false))
   }, [dispatch])
 
+  useEffect(() => {
+    form.resetFields()
+  }, [record])
+
   const handleSubmit = (values) => {
     setLoading(true)
 
@@ -48,12 +52,6 @@ const EditReviewModal = ({ record, visible, handleClose }) => {
     }
   }
 
-  useEffect(() => {
-    if (!loading) {
-      form.resetFields()
-    }
-  })
-
   return (
     <>
       <Modal
@@ -61,6 +59,7 @@ const EditReviewModal = ({ record, visible, handleClose }) => {
         title={`${record?.status} Review`}
         onCancel={handleClose}
         footer={[]}
+        forceRender
       >
         <Form {...layout} initialValues={record} form={form} onFinish={handleSubmit}>
           <Form.Item label="Employee">{employeesById[record?.employee]?.email}</Form.Item>

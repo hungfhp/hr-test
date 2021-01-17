@@ -5,7 +5,7 @@ export const getAuthUserThunk = () => {
   return (dispatch) => {
     dispatch(actions.getAuth())
 
-    // cache
+    // Cache
     const token = localStorage.getItem("token")
     const authUser = JSON.parse(localStorage.getItem("authUser"))
 
@@ -33,14 +33,14 @@ export const loginThunk = ({ email, password }) => {
         password
       })
       .then(({ data }) => {
-        // cache
+        // Cache
         localStorage.setItem("token", data?.token)
         localStorage.setItem("authUser", JSON.stringify(data?.user))
 
         dispatch(actions.loginSuccess(data?.user))
+        location.reload()
       })
       .catch((error) => {
-        console.log("dskjfsdklfl", error)
         dispatch(actions.loginSuccess(null))
       })
   }
@@ -52,5 +52,6 @@ export const logoutThunk = () => {
     localStorage.removeItem("token")
     localStorage.removeItem("authUser")
     dispatch(actions.logout())
+    location.reload()
   }
 }

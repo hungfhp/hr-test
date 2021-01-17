@@ -1,8 +1,8 @@
 export default {
   PORT: 8080,
-  MONGODB_URI: "mongodb://localhost:27017/baymax",
+  MONGODB_URI: "mongodb://localhost:27017/baymax_hungfhp",
 
-  JWT_PRIVATE_KEY: "People don't know this key",
+  JWT_PRIVATE_KEY: "My jwt private key",
 
   USER_ROLE: {
     ADMIN: "ADMIN",

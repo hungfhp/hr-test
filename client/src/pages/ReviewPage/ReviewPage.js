@@ -13,7 +13,7 @@ import EditReviewModal from "./components/EditReviewModal.js"
 function ReviewList(props) {
   const { list } = useSelector(selectReview)
   const { authUser } = useSelector(selectAuth)
-  const { list: employees, byId: employeesById } = useSelector(selectEmployee)
+  const { byId: employeesById } = useSelector(selectEmployee)
   const dispatch = useDispatch()
 
   let [loading, setLoading] = useState(false)
