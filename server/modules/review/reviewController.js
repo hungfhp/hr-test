@@ -1,9 +1,17 @@
-// import validator from 'validator'
-import Review from './reviewModel.js'
+import Review from "./reviewModel.js"
+import User from "../user/userModel.js"
+import config from "../../config/index.js"
 
 export const getReviews = async (req, res, next) => {
   try {
-    const reviews = await Review.find(req.query);
+    let reviews
+    if (req.authUser.role == config.USER_ROLE.ADMIN) {
+      reviews = await Review.find(req.query)
+    } else {
+      reviews = await Review.find({
+        $or: [{ reviewer: req.authUser._id }, { employee: req.authUser._id }]
+      })
+    }
     res.send(reviews)
   } catch (error) {
     next(error)
@@ -12,7 +20,7 @@ export const getReviews = async (req, res, next) => {
 
 export const getReview = async (req, res, next) => {
   try {
-    const review = await Review.findById(req.params.id);
+    const review = await Review.findById(req.params.id)
     res.send(review)
   } catch (error) {
     next(error)
@@ -21,7 +29,7 @@ export const getReview = async (req, res, next) => {
 
 export const postReview = async (req, res, next) => {
   try {
-    const newReview = await Review.create(req.body);
+    const newReview = await Review.create(req.body)
     res.send(newReview)
   } catch (error) {
     next(error)
@@ -30,8 +38,33 @@ export const postReview = async (req, res, next) => {
 
 export const putReview = async (req, res, next) => {
   try {
-    const updatedReview = await Review.findByIdAndUpdate(req.params.id, req.body)
-    res.send(updatedReview)
+    let updatingReview = await Review.findById(req.params.id)
+
+    switch (updatingReview.status) {
+      case config.REVIEW_STATUS.ASSIGNED:
+        if ((req.authUser._id = updatingReview.reviewer)) {
+          console.log("ASSIGNED")
+          updatingReview.content = req.body.content
+          updatingReview.status = config.REVIEW_STATUS.REVIEWED
+        }
+        break
+
+      case config.REVIEW_STATUS.REVIEWED:
+        console.log("REVIEWED")
+
+        if ((req.authUser._id = updatingReview.employee)) {
+          updatingReview.feedback = req.body.feedback
+          updatingReview.status = config.REVIEW_STATUS.FEEDBACKED
+        }
+        break
+
+      default:
+        break
+    }
+
+    await updatingReview.save()
+
+    res.send(updatingReview)
   } catch (error) {
     next(error)
   }

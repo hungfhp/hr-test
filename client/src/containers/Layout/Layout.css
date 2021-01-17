@@ -1,0 +1,6 @@
+.ant-layout-content {
+  min-height: calc(100vh - 64px);
+}
+.ant-layout-header {
+  background-color: white;
+}

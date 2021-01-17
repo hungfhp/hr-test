@@ -1,76 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css"
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Switch, Route } from "react-router-dom"
 
-import pages from '@/pages/'
-console.log(pages)
+import LoginPage from "#/pages/LoginPage/LoginPage.js"
+import EmployeePage from "#/pages/EmployeePage/EmployeePage.js"
+import ReviewPage from "#/pages/ReviewPage/ReviewPage.js"
+import ErrorPage from "#/pages/ErrorPage/ErrorPage.js"
 
-// const pages = [
-//   {
-//     path: '/employee_list',
-//     name: "Employee",
-//     Content: EmployeeList,
-//     Layout: Layout
-//   },
-//   {
-//     path: '/review_list',
-//     name: "Review",
-//     Content: ReviewList,
-//     Layout: Layout
-//   }
-// ]
+import { useSelector } from "react-redux"
+import { selectAuth } from "#/redux/slices/auth.js"
 
-const Page = ({path, name, Content, Layout}) => {
-  return <Route key={name} path={path}>
-  <Layout pages={pages}>
-    <Content />
-  </Layout>
-</Route>
-}
+import Layout from "#/containers/Layout"
 
 function App() {
+  const { authUser } = useSelector(selectAuth)
+
+  const is_viewer = !authUser
+  const is_auth = !!authUser
+  const is_admin = authUser?.role == "ADMIN"
+
   return (
     <Router>
-      <div>
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
+      <Layout is_viewer={is_viewer} is_auth={is_auth} is_admin={is_admin} authUser={authUser}>
         <Switch>
-          {
-            pages.map(page => {
-              return Page(page)
-            })
-          }
+          {is_viewer && <Route exact path="*" component={LoginPage} />}
+
+          {is_auth && <Route exact path="/" component={ReviewPage} />}
+          {is_auth && <Route exact path="/reviews" component={ReviewPage} />}
+
+          {is_admin && <Route exact path="/employees" component={EmployeePage} />}
+
+          <Route exact path="/404" component={ErrorPage} />
+          <Redirect to="/404" />
         </Switch>
-      </div>
+      </Layout>
     </Router>
-  );
-
-
-  // return (
-  //   <div className="App">
-  //     <header className="App-header">
-  //       <img src={logo} className="App-logo" alt="logo" />
-  //       <div>Hello My friend</div>
-  //       <p>
-  //         Edit <code>src/App.js</code> and save to reload.
-  //       </p>
-  //       <a
-  //         className="App-link"
-  //         href="https://reactjs.org"
-  //         target="_blank"
-  //         rel="noopener noreferrer"
-  //       >
-  //         Learn React
-  //       </a>
-  //     </header>
-  //   </div>
-  // );
+  )
 }
 
-export default App;
+export default App

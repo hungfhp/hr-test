@@ -1,0 +1,15 @@
+/* .login-form {
+  max-width: 400px;
+  margin: 0 auto;
+} */
+
+.login-form {
+  max-width: 300px;
+  margin: 0 auto;
+  /* position: absolute; */
+  padding-top: 100px;
+}
+
+.login-form-button {
+  width: 100%;
+}

@@ -1,24 +1,38 @@
-import EmployeeList from '@/pages/Employee/EmployeeList'
-import ReviewList from '@/pages/Review/ReviewList'
-import Layout from '@/containers/Layout/'
+import LoginPage from "#/pages/LoginPage/LoginPage.js"
+import EmployeePage from "#/pages/EmployeePage/EmployeePage.js"
+import ReviewPage from "#/pages/ReviewPage/ReviewPage.js"
 
-export default [
-  // {
-  //   path:'/',
-  //   name: "Home",
-  //   Content: EmployeeList,
-  //   Layout: Layout
-  // },
+const viewerPages = [
   {
-    path: '/employee_list',
-    name: "Employee",
-    Content: EmployeeList,
-    Layout: Layout
+    path: "/login",
+    name: "Login",
+    component: LoginPage
   },
   {
-    path: '/review_list',
-    name: "Review",
-    Content: ReviewList,
-    Layout: Layout
+    path: "/404",
+    name: "Login",
+    component: LoginPage
   }
 ]
+
+const authPages = [
+  {
+    path: "/employees",
+    name: "Employee",
+    component: EmployeePage
+  }
+]
+
+const adminPages = [
+  {
+    path: "/reviews",
+    name: "Review",
+    component: ReviewPage
+  }
+]
+
+export default {
+  viewerPages,
+  authPages,
+  adminPages
+}

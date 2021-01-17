@@ -1,12 +1,15 @@
-import express from 'express'
+import express from "express"
 const router = express.Router()
-import * as c_ from './reviewController.js'
+import { auth, admin } from "../../middlewares/permission.js"
+
+import * as c_ from "./reviewController.js"
 
 // api/reviews
-router.get('/', c_.getReviews)
-router.get('/:id', c_.getReview)
-router.post('/', c_.postReview)
-router.put('/:id', c_.putReview)
-router.delete('/:id', c_.deleteReview)
+router.get("/", auth, c_.getReviews)
+// router.get("/my", auth, c_.getMyReviews)
+router.get("/:id", auth, c_.getReview)
+router.post("/", auth, admin, c_.postReview)
+router.put("/:id", auth, c_.putReview)
+router.delete("/:id", auth, admin, c_.deleteReview)
 
 export default router
