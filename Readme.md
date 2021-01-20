@@ -1,8 +1,28 @@
+# Requirements
+
+Design a web application that allows employees to submit feedback toward each other's performance review.
+
+_Partial solutions are acceptable._ It is not necessary to submit a complete solution that implements every requirement.
+
+### Admin view
+
+- Add/remove/update/view employees
+- Add/update/view performance reviews
+- Assign employees to participate in another employee's performance review
+
+### Employee view
+
+- List of performance reviews requiring feedback
+- Submit feedback
+
+-----------------------------
+
 # Project setup
 
 ### Prerequisites
 
 MongoDB server running on port 27017
+
 NodeJS environment
 
 # Server
@@ -64,7 +84,6 @@ password:   123456
 3. Add/update/view employees
    Add/update/view performance reviews
    Assign one employee to participate in another employee's performance review
-   #Pending: remove employees, assign multiple employees to review
 
 ## Emloyee user
 
